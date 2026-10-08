@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="1200" height="240">
+<defs>
+  <pattern id="cardgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#FFFFFF" stroke-opacity=".025" stroke-width="1"/></pattern>
+</defs>
+<rect x="2" y="2" width="1196" height="236" rx="14" fill="#0B0D0F" stroke="#23262A" stroke-width="1"/>
+<rect x="3" y="3" width="1194" height="234" fill="url(#cardgrid)"/>
+
+<!-- Grid lines between columns -->
+<line x1="300" y1="20" x2="300" y2="220" stroke="#1D2024" stroke-width="1"/>
+<line x1="600" y1="20" x2="600" y2="220" stroke="#1D2024" stroke-width="1"/>
+<line x1="900" y1="20" x2="900" y2="220" stroke="#1D2024" stroke-width="1"/>
+
+<!-- Column 1: Hardware -->
+<g transform="translate(35, 30)">
+  <text x="0" y="20" font-family="JetBrains Mono, monospace" font-size="11px" font-weight="600" fill="#B62B32" letter-spacing="2">01 / TARGET HARDWARE</text>
+  <text x="0" y="52" font-family="Inter, sans-serif" font-size="20px" font-weight="700" fill="#E9E5DC">Smart Band 9 &amp; 10</text>
+  <text x="0" y="80" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Display: 192×490 / 212×520</text>
+  <text x="0" y="102" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Panel: AMOLED Capsule</text>
+  <text x="0" y="124" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">OS: Xiaomi Vela / HyperOS 2</text>
+  <text x="0" y="160" font-family="JetBrains Mono, monospace" font-size="11px" fill="#D9D6CE">designWidth: 192 (Fixed)</text>
+</g>
+
+<!-- Column 2: Runtime -->
+<g transform="translate(335, 30)">
+  <text x="0" y="20" font-family="JetBrains Mono, monospace" font-size="11px" font-weight="600" fill="#38BDF8" letter-spacing="2">02 / RUNTIME &amp; ENGINE</text>
+  <text x="0" y="52" font-family="Inter, sans-serif" font-size="20px" font-weight="700" fill="#E9E5DC">Vela QuickApp</text>
+  <text x="0" y="80" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Framework: aiot-toolkit 2.x</text>
+  <text x="0" y="102" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">JS Mode: Raw ES6 (no JSC)</text>
+  <text x="0" y="124" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Package: Standard .rpk</text>
+  <text x="0" y="160" font-family="JetBrains Mono, monospace" font-size="11px" fill="#D9D6CE">Memory Footprint: ~66 KB</text>
+</g>
+
+<!-- Column 3: Optics -->
+<g transform="translate(635, 30)">
+  <text x="0" y="20" font-family="JetBrains Mono, monospace" font-size="11px" font-weight="600" fill="#25D366" letter-spacing="2">03 / OPTICAL MATRIX</text>
+  <text x="0" y="52" font-family="Inter, sans-serif" font-size="20px" font-weight="700" fill="#E9E5DC">Inverted AMOLED</text>
+  <text x="0" y="80" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Size: 184×184 px (Scaled)</text>
+  <text x="0" y="102" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Color: #000000 bg / #FFFFFF</text>
+  <text x="0" y="124" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Resampling: NEAREST</text>
+  <text x="0" y="160" font-family="JetBrains Mono, monospace" font-size="11px" fill="#D9D6CE">Scanner Instant Trigger</text>
+</g>
+
+<!-- Column 4: Security -->
+<g transform="translate(935, 30)">
+  <text x="0" y="20" font-family="JetBrains Mono, monospace" font-size="11px" font-weight="600" fill="#F59E0B" letter-spacing="2">04 / ZERO-TRUST LOCAL</text>
+  <text x="0" y="52" font-family="Inter, sans-serif" font-size="20px" font-weight="700" fill="#E9E5DC">100% Offline</text>
+  <text x="0" y="80" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Network: 0 outbound calls</text>
+  <text x="0" y="102" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Storage: Local Flash Only</text>
+  <text x="0" y="124" font-family="JetBrains Mono, monospace" font-size="12px" fill="#8E8A82">Telemetry: None</text>
+  <text x="0" y="160" font-family="JetBrains Mono, monospace" font-size="11px" fill="#D9D6CE">Zero Companion Daemon</text>
+</g>
+</svg>
