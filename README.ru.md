@@ -70,33 +70,12 @@
 
 ---
 
-## 04 / ИНСТРУКЦИЯ ПО УСТАНОВКЕ
+## 04 / КАСТОМИЗАЦИЯ ЧЕРЕЗ ИИ (ШАГ 1: СНАЧАЛА СОБРАТЬ ПОД СЕБЯ)
 
-### Способ 1: Через Notify for Xiaomi (Рекомендуется)
+> [!NOTE]  
+> **Почему сначала кастомизация?** Ни Notify, ни Mi Fitness **не имеют редактора содержимого** на смартфоне. Все ваши контакты, ссылки и картинки вшиваются непосредственно в файл `.rpk` на этапе компиляции перед установкой.
 
-1. Скачайте свежий файл сборки в разделе **[Releases](https://github.com/mastermaiolo/QRWallet/releases)** (`com.custom.qrwallet.release.1.0.0.rpk`).
-2. Перенесите файл `.rpk` в память смартфона.
-3. Откройте **Notify for Xiaomi** → **Настройки / Устройство** → **Сторонние приложения** (*Third-party app*).
-4. Нажмите **Загрузить файл .rpk** и выберите скачанный файл.
-5. Дождитесь окончания передачи по Bluetooth.
-
-> [!IMPORTANT]
-> **Очистка кэша**: Если на браслете уже была установлена старая версия, **обязательно удалите её** через Notify или меню приложений браслета перед установкой новой. Это заставит систему Vela очистить кэш старых иконок из флеш-памяти.
-
-### Способ 2: Через модифицированный Mi Fitness
-
-1. Откройте мод Mi Fitness на телефоне.
-2. Перейдите в скрытое отладочное меню (`ThirdAppDebugFragment`).
-3. Введите имя пакета: `com.custom.qrwallet`.
-4. Нажмите **Install third app** и выберите `.rpk`.
-
----
-
-## 05 / КАСТОМИЗАЦИЯ С ПОМОЩЬЮ НЕЙРОСЕТЕЙ (AI PROMPT)
-
-Так как ни Notify, ни Mi Fitness **не имеют встроенного редактора** для изменения содержимого сторонних приложений, все контакты и QR-коды компилируются прямо в файл `.rpk`.
-
-Для настройки приложения под себя за пару секунд используйте готовый файл **[`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)**.
+Для настройки приложения под свои контакты используйте файл **[`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)**.
 
 <details>
 <summary><strong>Шаблон промпта для ИИ (Скопировать и вставить)</strong></summary>
@@ -104,31 +83,31 @@
 Скопируйте текст ниже и отправьте любой нейросети (**ChatGPT, Claude, Gemini, Antigravity, Cursor**):
 
 ```text
-Выступай в роли разработчика Xiaomi Vela QuickApp (для Xiaomi Smart Band 9 и 10).
-Я склонировал проект "QRWallet" и хочу настроить ярлыки, иконки и QR-коды под свои личные данные:
+You are an expert developer specializing in the Xiaomi Vela QuickApp framework (for Xiaomi Smart Band 9 & 10).
+I have cloned the "QRWallet" repository and want to customize the shortcuts, icons, and QR codes with my own data:
 
-Мои данные:
+My Data:
 - WhatsApp: [https://wa.me/XXXXXXXXXXX]
-- Telegram: [https://t.me/ваш_юзернейм]
-- Instagram: [https://instagram.com/ваш_юзернейм]
-- Revolut: [https://revolut.me/ваш_юзернейм]
-- GitHub: [https://github.com/ваш_юзернейм]
+- Telegram: [https://t.me/yourusername]
+- Instagram: [https://instagram.com/yourusername]
+- Revolut: [https://revolut.me/yourusername]
+- GitHub: [https://github.com/yourusername]
 - IBAN: [PT50000000000000000000000]
-- Телефон: [tel:+XXXXXXXXXXX]
-- Wi-Fi: [WIFI:S:ИмяСети;T:WPA;P:ПарольСети;;]
+- Phone: [tel:+XXXXXXXXXXX]
+- Wi-Fi: [WIFI:S:MyNetwork;T:WPA;P:MySecretPassword;;]
 
-Технические требования:
-1. QR-коды: 184x184 px, инвертированный темный режим (фон #000000, тело #FFFFFF), margin=1, алгоритм NEAREST, сохранить в src/common/qrcodes/<name>_dark.png.
-2. Иконки: 96x96 px RGBA PNG, прозрачный фон, в src/common/icons/<name>.png.
-3. Разметка: height: 160px, font-size: 24px, font-weight: normal (MiSans).
-4. Сборка: npm run release (без флага --enable-jsc). Увеличь versionCode в manifest.json.
+Technical Constraints:
+1. QR Codes: 184x184 px, inverted dark mode (#000000 background, #FFFFFF modules), margin=1, NEAREST resampling, saved to src/common/qrcodes/<name>_dark.png.
+2. Icons: 96x96 px RGBA PNG, saved to src/common/icons/<name>.png.
+3. Layout: height: 160px, font-size: 24px, font-weight: normal (MiSans).
+4. Build: npm run release (without --enable-jsc). Increment versionCode in manifest.json.
 ```
 
 </details>
 
 ---
 
-## 06 / ЛОКАЛЬНАЯ ГЕНЕРАЦИЯ (ЧЕРЕЗ ТЕРМИНАЛ)
+## 05 / ЛОКАЛЬНАЯ СБОРКА ЧЕРЕЗ ТЕРМИНАЛ
 
 Для тех, кто предпочитает локальный запуск через скрипт:
 
@@ -148,11 +127,35 @@ npm run release
 
 ---
 
+## 06 / ИНСТРУКЦИЯ ПО УСТАНОВКЕ (ШАГ 2: ПРОШИВКА НА БРАСЛЕТ)
+
+После того как вы собрали свой кастомный пакет `.rpk` (или если хотите протестировать шаблон по умолчанию из **[Releases](https://github.com/mastermaiolo/QRWallet/releases)**):
+
+### Способ 1: Через Notify for Xiaomi (Рекомендуется)
+
+1. Возьмите готовый файл `dist/com.custom.qrwallet.release.1.0.0.rpk` (или скачайте из Releases).
+2. Перенесите файл `.rpk` в память смартфона.
+3. Откройте **Notify for Xiaomi** → **Настройки / Устройство** → **Сторонние приложения** (*Third-party app*).
+4. Нажмите **Загрузить файл .rpk** и выберите скачанный файл.
+5. Дождитесь окончания передачи по Bluetooth.
+
+> [!IMPORTANT]
+> **Очистка кэша**: Если на браслете уже была установлена старая версия, **обязательно удалите её** через Notify или меню приложений браслета перед установкой новой. Это заставит систему Vela очистить кэш старых иконок из флеш-памяти.
+
+### Способ 2: Через модифицированный Mi Fitness
+
+1. Откройте мод Mi Fitness на телефоне.
+2. Перейдите в скрытое отладочное меню (`ThirdAppDebugFragment`).
+3. Введите имя пакета: `com.custom.qrwallet`.
+4. Нажмите **Install third app** и выберите `.rpk`.
+
+---
+
 ## 07 / СТРУКТУРА ПРОЕКТА
 
 ```text
 QRWallet/
-├── AI_CUSTOMIZATION_PROMPT.md    # Готовый промпт для нейросетей
+├── AI_CUSTOMIZATION_PROMPT.md    # Готовый промпт для нейросетей (на английском)
 ├── generate_assets.py            # Локальный скрипт сборки ресурсов
 ├── icon/                         # Векторные SVG-иконки (96x96)
 ├── icon2.png                     # Иконка кошелька для меню (128x128)

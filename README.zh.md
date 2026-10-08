@@ -70,33 +70,12 @@
 
 ---
 
-## 04 / 安装指南
+## 04 / 人工智能定制 (步骤一：先定制并打包)
 
-### 推荐路径（使用 Notify for Xiaomi）
+> [!NOTE]  
+> **为什么必须先定制再安装？** 官方 Mi Fitness 和 Notify 均**不提供在手机界面动态修改快应用内容的功能**，你的个人凭证、链接与二维码必须在安装前直接编译进 `.rpk` 二进制安装包中。
 
-1. 在 **[Releases](https://github.com/mastermaiolo/QRWallet/releases)** 页面下载预编译好的安装包（`com.custom.qrwallet.release.1.0.0.rpk`）。
-2. 将 `.rpk` 文件传至手机存储中。
-3. 打开手机上的 **Notify for Xiaomi** App → 进入 **设置 / 设备** → **第三方应用 (Third-party app)**。
-4. 点击 **加载 .rpk 文件** 并选择该安装包。
-5. 等待蓝牙传输完毕即可在手环应用列表打开。
-
-> [!IMPORTANT]
-> **缓存刷新注意事项**：若之前已安装过旧版，**请务必先在 Notify 或手环应用列表卸载旧版**，再上传新版安装包。这能强制 Vela 系统清空 Flash 闪存中的图标缓存。
-
-### 备用路径（使用 Mi Fitness 修改版开发者菜单）
-
-1. 在手机上启动支持第三方调试的 Mi Fitness 修改版。
-2. 调出隐藏调试页面（`ThirdAppDebugFragment`）。
-3. 包名填写：`com.custom.qrwallet`。
-4. 点击 **Install third app** 选择 `.rpk` 文件安装。
-
----
-
-## 05 / 人工智能一键定制 (AI Prompt)
-
-由于官方 Mi Fitness 和 Notify 均**不提供在手机界面动态修改快应用内容的功能**，所有自定义信息都必须在打包时直接编译进 `.rpk` 二进制包中。
-
-为了让你无需手写前端代码即可拥有专属版本，我们准备了 **[`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)**。
+为了让你无需手写前端代码即可拥有专属版本，请使用 **[`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)**。
 
 <details>
 <summary><strong>AI 定制提示词模板（可直接复制）</strong></summary>
@@ -104,31 +83,31 @@
 直接复制下方内容发送给任何大模型助手（**ChatGPT、Claude、Gemini、Antigravity、Cursor**）：
 
 ```text
-你是一名精通小米 Vela 快应用（针对小米手环 9 与 10）的前端工程师。
-我已经克隆了 "QRWallet" 项目，现在希望用我个人的数据定制专属的二维码和快捷方式：
+You are an expert developer specializing in the Xiaomi Vela QuickApp framework (for Xiaomi Smart Band 9 & 10).
+I have cloned the "QRWallet" repository and want to customize the shortcuts, icons, and QR codes with my own data:
 
-我的数据：
-- 微信/WhatsApp: [你的链接，如 https://wa.me/8613800000000]
-- Telegram: [https://t.me/你的用户名]
-- Instagram: [https://instagram.com/你的用户名]
-- 支付宝/Revolut: [你的链接]
-- GitHub: [https://github.com/你的用户名]
-- 银行卡/IBAN: [卡号纯文本]
-- 电话拨号: [tel:+8613800000000]
-- Wi-Fi 无线网络: [WIFI:S:WiFi名称;T:WPA;P:WiFi密码;;]
+My Data:
+- WhatsApp: [https://wa.me/8613800000000]
+- Telegram: [https://t.me/yourusername]
+- Instagram: [https://instagram.com/yourusername]
+- Revolut: [https://revolut.me/yourusername]
+- GitHub: [https://github.com/yourusername]
+- IBAN: [Your plain account number]
+- Phone: [tel:+8613800000000]
+- Wi-Fi: [WIFI:S:MyNetwork;T:WPA;P:MySecretPassword;;]
 
-技术实现规范：
-1. 二维码：尺寸 184x184 px，AMOLED反色模式（纯黑背景 #000000，纯白模块 #FFFFFF），margin=1，采用 NEAREST 插值，保存到 src/common/qrcodes/<name>_dark.png。
-2. 列表图标：96x96 px RGBA PNG，透明背景，保存到 src/common/icons/<name>.png。
-3. 界面样式：每项高 160px，字体 24px normal（使用手环原生 MiSans）。
-4. 编译输出：执行 npm run release（禁止使用 --enable-jsc 避免黑屏），递增 manifest.json 的 versionCode。
+Technical Constraints:
+1. QR Codes: 184x184 px, inverted dark mode (#000000 background, #FFFFFF modules), margin=1, NEAREST resampling, saved to src/common/qrcodes/<name>_dark.png.
+2. Icons: 96x96 px RGBA PNG, saved to src/common/icons/<name>.png.
+3. Layout: height: 160px, font-size: 24px, font-weight: normal (MiSans).
+4. Build: npm run release (without --enable-jsc). Increment versionCode in manifest.json.
 ```
 
 </details>
 
 ---
 
-## 06 / 本地脚本生成
+## 05 / 本地脚本生成 (本地终端备用路径)
 
 如果你习惯本地控制台自动化：
 
@@ -148,11 +127,35 @@ npm run release
 
 ---
 
+## 06 / 安装指南 (步骤二：刷入手环)
+
+打包出专属的 `.rpk` 后（或如果想先体验 **[Releases](https://github.com/mastermaiolo/QRWallet/releases)** 中的演示模板）：
+
+### 推荐路径（使用 Notify for Xiaomi）
+
+1. 找到编译好的安装包 `dist/com.custom.qrwallet.release.1.0.0.rpk`（或从 Releases 下载）。
+2. 将 `.rpk` 文件传至手机存储中。
+3. 打开手机上的 **Notify for Xiaomi** App → 进入 **设置 / 设备** → **第三方应用 (Third-party app)**。
+4. 点击 **加载 .rpk 文件** 并选择该安装包。
+5. 等待蓝牙传输完毕即可在手环应用列表打开。
+
+> [!IMPORTANT]
+> **缓存刷新注意事项**：若之前已安装过旧版，**请务必先在 Notify 或手环应用列表卸载旧版**，再上传新版安装包。这能强制 Vela 系统清空 Flash 闪存中的图标缓存。
+
+### 备用路径（使用 Mi Fitness 修改版开发者菜单）
+
+1. 在手机上启动支持第三方调试的 Mi Fitness 修改版。
+2. 调出隐藏调试页面（`ThirdAppDebugFragment`）。
+3. 包名填写：`com.custom.qrwallet`。
+4. 点击 **Install third app** 选择 `.rpk` 文件安装。
+
+---
+
 ## 07 / 代码库架构
 
 ```text
 QRWallet/
-├── AI_CUSTOMIZATION_PROMPT.md    # AI 定制专用提示词
+├── AI_CUSTOMIZATION_PROMPT.md    # AI 定制专用提示词（英文母版）
 ├── generate_assets.py            # 本地全自动资源生成脚本
 ├── icon/                         # 原始 96x96 SVG 图标库
 ├── icon2.png                     # 手环主菜单钱包图标 (128x128)

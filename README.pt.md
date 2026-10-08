@@ -70,31 +70,10 @@
 
 ---
 
-## 04 / INSTALAÇÃO
+## 04 / CUSTOMIZAÇÃO POR INTELIGÊNCIA ARTIFICIAL (PASSO 1: CUSTOMIZAR E GERAR O .RPK)
 
-### Via Notify for Xiaomi (Recomendado)
-
-1. Baixe o pacote compilado mais recente em **[Releases](https://github.com/mastermaiolo/QRWallet/releases)** (`com.custom.qrwallet.release.1.0.0.rpk`).
-2. Transfira o arquivo `.rpk` para o seu telemóvel.
-3. Abra o **Notify for Xiaomi** → Vá em **Definições / Dispositivo** → **Aplicativo de terceiros**.
-4. Toque em **Carregar arquivo .rpk** e selecione o pacote.
-5. Aguarde o envio Bluetooth concluir.
-
-> [!IMPORTANT]
-> **Regra de Invalidação de Cache**: Se você já tiver uma versão anterior instalada na pulseira, **desinstale-a primeiro** pelo Notify ou pelo menu de apps do relógio antes de enviar a nova versão. Isso força o Xiaomi Vela a limpar os ícones antigos da memória flash.
-
-### Via Mi Fitness Modificado (Developer Menu)
-
-1. Abra o app Mi Fitness modificado no smartphone pareado.
-2. Acesse a tela de depuração oculta (`ThirdAppDebugFragment`).
-3. Digite o package name: `com.custom.qrwallet`.
-4. Toque em **Install third app** e selecione o arquivo `.rpk`.
-
----
-
-## 05 / CUSTOMIZAÇÃO POR INTELIGÊNCIA ARTIFICIAL
-
-Como nem o Notify nem o Mi Fitness possuem interface gráfica para editar arquivos de QuickApps no celular, **todas as credenciais e imagens são compiladas diretamente no binário `.rpk`**.
+> [!NOTE]  
+> **Por que customizar primeiro?** Nem o Notify nem o Mi Fitness possuem interface gráfica para editar arquivos de QuickApps no celular. **Todas as suas credenciais, links e ícones são compilados diretamente no binário `.rpk` antes da instalação.**
 
 Para personalizar este repositório com seus dados em poucos segundos, utilize o arquivo **[`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)**.
 
@@ -104,31 +83,31 @@ Para personalizar este repositório com seus dados em poucos segundos, utilize o
 Copie o bloco abaixo e envie para qualquer IA (**ChatGPT, Claude, Gemini, Antigravity, Cursor**):
 
 ```text
-Você é um desenvolvedor especialista no framework Xiaomi Vela QuickApp (para Xiaomi Smart Band 9 e 10).
-Eu tenho o projeto "QRWallet" e quero customizar os atalhos, ícones e QR Codes com os meus dados:
+You are an expert developer specializing in the Xiaomi Vela QuickApp framework (for Xiaomi Smart Band 9 & 10).
+I have cloned the "QRWallet" repository and want to customize the shortcuts, icons, and QR codes with my own data:
 
-Meus Dados:
+My Data:
 - WhatsApp: [https://wa.me/351912345678]
-- Telegram: [https://t.me/seunome]
-- Instagram: [https://instagram.com/seunome]
-- Revolut: [https://revolut.me/seunome]
-- GitHub: [https://github.com/seunome]
+- Telegram: [https://t.me/yourusername]
+- Instagram: [https://instagram.com/yourusername]
+- Revolut: [https://revolut.me/yourusername]
+- GitHub: [https://github.com/yourusername]
 - IBAN: [PT50000000000000000000000]
-- Telefone: [tel:+351912345678]
-- Wi-Fi: [WIFI:S:NomeDaRede;T:WPA;P:SenhaSecreta;;]
+- Phone: [tel:+351912345678]
+- Wi-Fi: [WIFI:S:MyNetwork;T:WPA;P:MySecretPassword;;]
 
-Restrições Técnicas:
-1. QR Codes: 184x184 px, modo escuro invertido (fundo #000000, módulos #FFFFFF), margem=1, interpolação NEAREST, salvos em src/common/qrcodes/<nome>_dark.png.
-2. Ícones: 96x96 px RGBA PNG, salvos em src/common/icons/<nome>.png.
+Technical Constraints:
+1. QR Codes: 184x184 px, inverted dark mode (#000000 background, #FFFFFF modules), margin=1, NEAREST resampling, saved to src/common/qrcodes/<name>_dark.png.
+2. Icons: 96x96 px RGBA PNG, saved to src/common/icons/<name>.png.
 3. Layout: height: 160px, font-size: 24px, font-weight: normal (MiSans).
-4. Compilação: npm run release (sem --enable-jsc). Incremente o versionCode no manifest.json.
+4. Build: npm run release (without --enable-jsc). Increment versionCode in manifest.json.
 ```
 
 </details>
 
 ---
 
-## 06 / AUTOMAÇÃO LOCAL (TERMINAL)
+## 05 / AUTOMAÇÃO LOCAL (CAMINHO ALTERNATIVO VIA TERMINAL)
 
 Para gerar localmente sem depender de interfaces de chat:
 
@@ -148,11 +127,35 @@ O pacote `.rpk` final estará pronto em:
 
 ---
 
+## 06 / INSTALAÇÃO NA PULSEIRA (PASSO 2: INSTALAR O .RPK)
+
+Depois de compilar o seu pacote `.rpk` personalizado (ou se quiser testar a versão modelo de demonstração do **[Releases](https://github.com/mastermaiolo/QRWallet/releases)**), instale usando um dos métodos abaixo:
+
+### Via Notify for Xiaomi (Recomendado)
+
+1. Pegue o seu arquivo compilado em `dist/com.custom.qrwallet.release.1.0.0.rpk` (ou baixe da aba Releases).
+2. Transfira o arquivo `.rpk` para o seu telemóvel.
+3. Abra o **Notify for Xiaomi** → Vá em **Definições / Dispositivo** → **Aplicativo de terceiros**.
+4. Toque em **Carregar arquivo .rpk** e selecione o pacote.
+5. Aguarde o envio Bluetooth concluir.
+
+> [!IMPORTANT]
+> **Regra de Invalidação de Cache**: Se você já tiver uma versão anterior instalada na pulseira, **desinstale-a primeiro** pelo Notify ou pelo menu de apps do relógio antes de enviar a nova versão. Isso força o Xiaomi Vela a limpar os ícones antigos da memória flash.
+
+### Via Mi Fitness Modificado (Developer Menu)
+
+1. Abra o app Mi Fitness modificado no smartphone pareado.
+2. Acesse a tela de depuração oculta (`ThirdAppDebugFragment`).
+3. Digite o package name: `com.custom.qrwallet`.
+4. Toque em **Install third app** e selecione o arquivo `.rpk`.
+
+---
+
 ## 07 / ARQUITETURA DE ARQUIVOS
 
 ```text
 QRWallet/
-├── AI_CUSTOMIZATION_PROMPT.md    # Instruções prontas para IA
+├── AI_CUSTOMIZATION_PROMPT.md    # Instruções prontas para IA (em inglês)
 ├── generate_assets.py            # Pipeline de automação (qrencode + Pillow + rsvg)
 ├── icon/                         # Vetores SVG originais (96x96)
 ├── icon2.png                     # Ícone mestre do launcher (128x128)

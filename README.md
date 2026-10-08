@@ -70,31 +70,10 @@
 
 ---
 
-## 04 / INSTALLATION
+## 04 / AI CUSTOMIZATION SURFACE (STEP 1: CUSTOMIZE & BUILD)
 
-### Fast Path (Notify for Xiaomi)
-
-1. Download the latest compiled package from **[Releases](https://github.com/mastermaiolo/QRWallet/releases)** (`com.custom.qrwallet.release.1.0.0.rpk`).
-2. Transfer the `.rpk` file to your mobile phone.
-3. Open **Notify for Xiaomi** → Navigate to **Settings / Device** → **Third-party app** (*Aplicativo de terceiros*).
-4. Tap **Upload .rpk file** and select the downloaded package.
-5. Wait for the Bluetooth synchronisation to finish.
-
-> [!IMPORTANT]
-> **Cache Invalidation Rule**: If you already have a prior build of the app installed on the band, **uninstall it first** through Notify or on the band's application menu before flashing the new build. This forces Xiaomi Vela to purge cached icons from flash storage.
-
-### Alternative Path (Mi Fitness Modded / Developer Menu)
-
-1. Open the modded Mi Fitness app on your paired smartphone.
-2. Launch the hidden developer fragment (`ThirdAppDebugFragment`).
-3. Set the package identifier: `com.custom.qrwallet`.
-4. Tap **Install third app** and choose the `.rpk` file.
-
----
-
-## 05 / AI CUSTOMIZATION SURFACE
-
-Because neither Notify nor Mi Fitness provides an in-app graphical editor to modify third-party QuickApp contents on the fly, **all credentials and images are compiled directly into the binary `.rpk`**.
+> [!NOTE]  
+> **Why customize first?** Neither Notify nor Mi Fitness provides an in-app graphical editor to modify the content of third-party QuickApps on your phone. **All your credentials, links, and icons must be compiled directly into the binary `.rpk` package before installation.**
 
 To customize this repository with your personal links, usernames, and Wi-Fi credentials in seconds, use **[`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)**.
 
@@ -128,7 +107,7 @@ Technical Constraints:
 
 ---
 
-## 06 / LOCAL AUTOMATION
+## 05 / LOCAL AUTOMATION (ALTERNATIVE BUILD PATH)
 
 For local generation without chat interfaces, use the included automation script:
 
@@ -148,11 +127,35 @@ The resulting signed package will be ready at:
 
 ---
 
+## 06 / INSTALLATION (STEP 2: FLASH TO BAND)
+
+Once your custom `.rpk` has been compiled (or if you want to test the default template from **[Releases](https://github.com/mastermaiolo/QRWallet/releases)**), install it using one of the two methods below:
+
+### Fast Path (Notify for Xiaomi — Recommended)
+
+1. Locate your compiled package at `dist/com.custom.qrwallet.release.1.0.0.rpk` (or download the pre-built template from Releases).
+2. Transfer the `.rpk` file to your mobile phone.
+3. Open **Notify for Xiaomi** → Navigate to **Settings / Device** → **Third-party app** (*Aplicativo de terceiros*).
+4. Tap **Upload .rpk file** and select the package.
+5. Wait for the Bluetooth synchronisation to finish.
+
+> [!IMPORTANT]
+> **Cache Invalidation Rule**: If you already have a prior build of the app installed on the band, **uninstall it first** through Notify or on the band's application menu before flashing the new build. This forces Xiaomi Vela to purge cached icons from flash storage.
+
+### Alternative Path (Mi Fitness Modded / Developer Menu)
+
+1. Open the modded Mi Fitness app on your paired smartphone.
+2. Launch the hidden developer fragment (`ThirdAppDebugFragment`).
+3. Set the package identifier: `com.custom.qrwallet`.
+4. Tap **Install third app** and choose the `.rpk` file.
+
+---
+
 ## 07 / ARCHITECTURE
 
 ```text
 QRWallet/
-├── AI_CUSTOMIZATION_PROMPT.md    # Reusable AI instructions
+├── AI_CUSTOMIZATION_PROMPT.md    # Reusable AI instructions (in English)
 ├── generate_assets.py            # Local asset pipeline (qrencode + Pillow + rsvg)
 ├── icon/                         # Master SVG vector assets (96x96)
 ├── icon2.png                     # App launcher icon source (128x128)
