@@ -1,0 +1,15 @@
+{
+  "name": "qrwallet",
+  "version": "1.0.0",
+  "description": "QRWallet - QR Codes and Shortcuts QuickApp for Xiaomi Smart Band 9 & 10 (Xiaomi Vela / HyperOS)",
+  "scripts": {
+    "start": "aiot start --watch",
+    "build": "aiot build",
+    "release": "aiot release"
+  },
+  "devDependencies": {
+    "@aiot-toolkit/jsc": "^1.0.3",
+    "adm-zip": "^0.5.16",
+    "aiot-toolkit": "^2.0.5"
+  }
+}

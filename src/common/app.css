@@ -1,0 +1,9 @@
+.top {
+  position: absolute;
+  top: 24px;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 8px;
+}
