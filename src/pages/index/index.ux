@@ -84,10 +84,10 @@ const APP_ITEMS = [
     qrDark: "/common/qrcodes/instagram_dark.png"
   },
   {
-    id: "revolut",
-    title: "Revolut",
-    icon: "/common/icons/revolut.png",
-    qrDark: "/common/qrcodes/revolut_dark.png"
+    id: "mail",
+    title: "E-mail",
+    icon: "/common/icons/mail.png",
+    qrDark: "/common/qrcodes/mail_dark.png"
   },
   {
     id: "github",
@@ -96,10 +96,10 @@ const APP_ITEMS = [
     qrDark: "/common/qrcodes/github_dark.png"
   },
   {
-    id: "iban",
-    title: "IBAN",
-    icon: "/common/icons/iban.png",
-    qrDark: "/common/qrcodes/iban_dark.png"
+    id: "vk",
+    title: "VK",
+    icon: "/common/icons/vk.png",
+    qrDark: "/common/qrcodes/vk_dark.png"
   },
   {
     id: "phone",
