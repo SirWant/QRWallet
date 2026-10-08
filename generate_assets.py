@@ -26,30 +26,8 @@ APP_LOGO_PATH = BASE_DIR / "icon2.png"
 # =====================================================================
 QR_ITEMS = {
     # WhatsApp direct message link: https://wa.me/<country_code><number>
-    "whatsapp": "https://wa.me/351912345678",
-
-    # Telegram profile link: https://t.me/<username>
-    "telegram": "https://t.me/yourusername",
-
-    # Instagram profile link: https://instagram.com/<username>
-    "instagram": "https://instagram.com/yourusername",
-
-    # Revolut payment link: https://revolut.me/<revtag>
-    "revolut": "https://revolut.me/yourusername",
-
-    # GitHub profile link: https://github.com/<username>
-    "github": "https://github.com/mastermaiolo",
-
-    # Bank IBAN (plain text without spaces for best bank scanner compatibility)
-    "iban": "PT50000000000000000000000",
-
-    # Phone direct dialer: tel:+<country_code><number>
-    "phone": "tel:+351912345678",
-
-    # Wi-Fi network: WIFI:S:<SSID>;T:<WPA|WEP|nopass>;P:<Password>;;
-    "wifi": "WIFI:S:MyHomeWiFi;T:WPA;P:MySuperSecretPassword;;",
+    "whatsapp": "https://wa.me/78124495010",
 }
-
 
 def ensure_dirs():
     QR_DIR.mkdir(parents=True, exist_ok=True)
