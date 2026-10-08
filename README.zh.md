@@ -105,6 +105,12 @@ Technical Constraints:
 
 </details>
 
+### 🎨 自定义图标与快捷方式规范
+- **透明 RGBA PNG / 矢量 SVG**：务必使用**100% 透明背景 (RGBA)**的 PNG 或保存在 `icon/` 中的 SVG 矢量图。手环采用纯黑 AMOLED 屏幕 (`#000000`)，带有白色或实色矩形底色的图标会严重破坏界面纯净感。
+- **原生 96 × 96 像素分辨率**：放入 `src/common/icons/` 的高分辨率图片（如 512×512）在运行 `python3 generate_assets.py` 时会自动缩放并标准化为 96×96 RGBA。请保持 1:1 比例并使主体居中。
+- **添加 / 删除快捷方式**：你可以自由增加（例如 Discord, Spotify, 微信, 支付宝）或删除项目，只需同步修改 `src/pages/index/index.ux` 中的 `APP_ITEMS` 和 `generate_assets.py` 中的 `QR_ITEMS`。
+- **URI 链接格式**：更多数据格式（`tel:+`, `https://wa.me/`, `WIFI:S:...;T:WPA;P:...;;` 等）详见 [`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md)。
+
 ---
 
 ## 05 / 本地脚本生成 (本地终端备用路径)

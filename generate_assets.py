@@ -105,28 +105,34 @@ def generate_dark_qr(payload: str, output_path: Path):
 
 
 def convert_icons():
-    """Converts SVG files from icon/ directory to 96x96 px PNGs."""
-    if not SVG_SRC_DIR.exists():
-        print(f"⚠️  No 'icon/' folder found at {SVG_SRC_DIR}. Skipping SVG conversion.")
-        return
-
-    svg_files = list(SVG_SRC_DIR.glob("*.svg"))
-    if not svg_files:
-        print("ℹ️  No SVGs found in 'icon/' folder.")
-        return
-
-    print(f"\n🎨 Converting {len(svg_files)} SVGs to 96x96 PNG...")
+    """Converts SVG files from icon/ to 96x96 PNGs, and ensures all PNGs in icons/ are 96x96 RGBA."""
     has_rsvg = shutil.which("rsvg-convert") is not None
 
-    for svg in svg_files:
-        target_png = ICON_DIR / f"{svg.stem}.png"
-        if has_rsvg:
-            cmd = ["rsvg-convert", "-w", "96", "-h", "96", str(svg), "-o", str(target_png)]
-            subprocess.run(cmd, check=True)
-            print(f"  ✓ Icon: {target_png.name} (96x96 px)")
-        else:
-            print(f"⚠️  rsvg-convert not found. Please install librsvg (e.g., sudo pacman -S librsvg).")
-            break
+    if SVG_SRC_DIR.exists():
+        svg_files = list(SVG_SRC_DIR.glob("*.svg"))
+        if svg_files:
+            print(f"\n🎨 Converting {len(svg_files)} SVGs to 96x96 PNG...")
+            for svg in svg_files:
+                target_png = ICON_DIR / f"{svg.stem}.png"
+                if has_rsvg:
+                    cmd = ["rsvg-convert", "-w", "96", "-h", "96", str(svg), "-o", str(target_png)]
+                    subprocess.run(cmd, check=True)
+                    print(f"  ✓ SVG Icon: {target_png.name} (96x96 px)")
+                else:
+                    print(f"⚠️  rsvg-convert not found. Please install librsvg (e.g., sudo pacman -S librsvg).")
+                    break
+
+    # Also normalize any custom PNG dropped directly into src/common/icons/
+    png_files = list(ICON_DIR.glob("*.png"))
+    for png in png_files:
+        try:
+            im = Image.open(png)
+            if im.size != (96, 96) or im.mode != "RGBA":
+                im_96 = im.convert("RGBA").resize((96, 96), Image.Resampling.LANCZOS)
+                im_96.save(png)
+                print(f"  ✓ Normalized PNG: {png.name} -> (96x96 px RGBA)")
+        except Exception as e:
+            print(f"⚠️  Could not process {png.name}: {e}")
 
 
 def convert_app_logo():

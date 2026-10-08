@@ -54,33 +54,97 @@ Update the project files or execute 'python3 generate_assets.py' with my credent
 
 ---
 
+## 🎨 Guidelines for Custom Icons & Brand Logos
+
+To ensure your shortcuts look as clean as native Xiaomi watch apps:
+
+1. **Format & Transparency (Mandatory)**:
+   - Always use **PNG with an alpha channel (RGBA)** or **vector SVG**.
+   - **Background must be 100% transparent**. Because the Xiaomi Smart Band uses a pitch-black AMOLED display (`#000000`), icons with solid white or grey bounding boxes look awkward. Transparent icons blend seamlessly into the screen.
+2. **Resolution & Sharpness**:
+   - The native icon display size on the watch is **96 × 96 px**.
+   - For best sharpness, use high-resolution source images (e.g., 256×256 or 512×512 px) and downscale using LANCZOS or let `generate_assets.py` auto-normalize them.
+   - Maintain a square **1:1 aspect ratio** with the brand glyph or symbol centered.
+3. **Where to place custom icons**:
+   - **Vector icons**: Save your `.svg` files into the `icon/` directory (e.g., `icon/discord.svg`).
+   - **Raster icons**: Save your `.png` files directly into `src/common/icons/` (e.g., `src/common/icons/discord.png`).
+
+---
+
+## 📝 How to Add, Rename, or Remove Shortcuts
+
+You are not limited to the default 8 services! You can add Discord, LinkedIn, Spotify, Pix, Twitch, or remove anything you don't need:
+
+### Step 1: Update the User Interface (`src/pages/index/index.ux`)
+Open `src/pages/index/index.ux` and locate the `APP_ITEMS` array (around line 67). Edit, add, or delete entries:
+
+```javascript
+const APP_ITEMS = [
+  {
+    id: "discord",
+    title: "Discord",
+    icon: "/common/icons/discord.png",
+    qrDark: "/common/qrcodes/discord_dark.png"
+  },
+  {
+    id: "spotify",
+    title: "Spotify",
+    icon: "/common/icons/spotify.png",
+    qrDark: "/common/qrcodes/spotify_dark.png"
+  }
+]
+```
+
+### Step 2: Update the Asset Generator (`generate_assets.py`)
+In `generate_assets.py`, update `QR_ITEMS` with matching keys and your desired payload:
+
+```python
+QR_ITEMS = {
+    "discord": "https://discord.gg/yourserver",
+    "spotify": "https://open.spotify.com/user/yourprofile",
+}
+```
+
+---
+
+## 📋 QR Code Payload Cheat Sheet
+
+Use these exact URI formats when defining your QR codes to trigger the phone's native handlers immediately:
+
+| Shortcut Type | Format / URI Scheme | Example Value |
+| :--- | :--- | :--- |
+| **Web Link / Social** | Standard URL | `https://instagram.com/myusername` |
+| **WhatsApp Direct** | `https://wa.me/<country_code><number>` | `https://wa.me/351912345678` |
+| **Telegram Profile** | `https://t.me/<username>` | `https://t.me/myusername` |
+| **Phone Dialer** | `tel:<country_code><number>` | `tel:+351912345678` |
+| **Wi-Fi Auto-Join** | `WIFI:S:<SSID>;T:<WPA\|WEP\|nopass>;P:<password>;;` | `WIFI:S:MyHome;T:WPA;P:Secret123;;` |
+| **Email Message** | `mailto:<email>?subject=<text>` | `mailto:contact@example.com` |
+| **IBAN / Bank Account** | Plain alphanumeric text without spaces | `PT50000000000000000000000` |
+| **Cryptocurrency** | `<coin>:<wallet_address>` | `bitcoin:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa` |
+
+---
+
 ## 🛠️ Local Terminal Automation (`generate_assets.py`)
 
-If you prefer to generate your assets locally in the terminal without using an AI chat interface:
+If you prefer to generate your assets locally in the terminal:
 
-1. Open `generate_assets.py`.
-2. Edit the `QR_ITEMS` dictionary with your credentials:
-   ```python
-   QR_ITEMS = {
-       "whatsapp": "https://wa.me/351912345678",
-       "telegram": "https://t.me/yourusername",
-       "instagram": "https://instagram.com/yourusername",
-       "revolut": "https://revolut.me/yourusername",
-       "github": "https://github.com/yourusername",
-       "iban": "PT50000000000000000000000",
-       "phone": "tel:+351912345678",
-       "wifi": "WIFI:S:MyNetwork;T:WPA;P:MyPassword;;",
-   }
+1. **Install dependencies (First time only)**:
+   ```bash
+   npm install
+   pip install Pillow
    ```
-3. Run the automated script:
+2. **Edit your credentials**:
+   Open `generate_assets.py` and modify `QR_ITEMS`.
+3. **Run the generator**:
    ```bash
    python3 generate_assets.py
    ```
-4. Compile the application:
+   *(This automatically generates inverted AMOLED QR codes and normalizes all icons to 96×96 RGBA PNG)*.
+4. **Compile the release package**:
    ```bash
    npm run release
    ```
-5. Your signed `.rpk` will be generated in `dist/`.
+   The signed `.rpk` will be generated in `dist/com.custom.qrwallet.release.1.0.0.rpk`.
 
 ---
 

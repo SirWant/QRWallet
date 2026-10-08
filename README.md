@@ -105,6 +105,12 @@ Technical Constraints:
 
 </details>
 
+### 🎨 Guidelines for Custom Icons & Shortcuts
+- **Transparent PNG / Vector SVG**: Always use icons with a **100% transparent background (RGBA)** or vector SVGs in `icon/`. Because the band has a pitch-black AMOLED screen (`#000000`), icons with white or solid bounding boxes look unnatural.
+- **Native 96 × 96 px Resolution**: High-resolution icons (e.g. 512×512) placed into `src/common/icons/` will be automatically resized and normalized to 96×96 RGBA when running `python3 generate_assets.py`. Maintain a 1:1 aspect ratio with centered glyphs.
+- **Add / Remove Shortcuts**: You can add any service (Discord, Spotify, Pix, Twitch) or remove entries by updating `APP_ITEMS` in `src/pages/index/index.ux` and `QR_ITEMS` in `generate_assets.py`.
+- **Payload Schemes**: Check [`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md) for full URI formats (`tel:+`, `https://wa.me/`, `WIFI:S:...;T:WPA;P:...;;`, etc.).
+
 ---
 
 ## 05 / LOCAL AUTOMATION (ALTERNATIVE BUILD PATH)

@@ -105,6 +105,12 @@ Technical Constraints:
 
 </details>
 
+### 🎨 Diretrizes para Ícones e Atalhos Personalizados
+- **PNG Transparente / SVG Vetorial**: Utilize sempre ícones com **fundo 100% transparente (RGBA)** ou SVGs vetoriais na pasta `icon/`. Como o display da pulseira é AMOLED preto puro (`#000000`), imagens com caixas ou fundos sólidos (brancos ou cinzas) criam um recorte visual desagradável.
+- **Resolução Nativa 96 × 96 px**: Ícones de alta resolução (ex: 512×512) colocados em `src/common/icons/` serão redimensionados e normalizados automaticamente para 96×96 RGBA ao executar `python3 generate_assets.py`. Mantenha proporção 1:1 e o logo centralizado.
+- **Adicionar / Remover Atalhos**: Pode adicionar qualquer serviço (Discord, Spotify, Pix, Twitch) ou remover o que não precisa editando `APP_ITEMS` em `src/pages/index/index.ux` e `QR_ITEMS` em `generate_assets.py`.
+- **Formatos de URI**: Consulte o [`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md) para obter o guia completo de formatos (`tel:+`, `https://wa.me/`, `WIFI:S:...;T:WPA;P:...;;`, etc.).
+
 ---
 
 ## 05 / AUTOMAÇÃO LOCAL (CAMINHO ALTERNATIVO VIA TERMINAL)

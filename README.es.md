@@ -105,6 +105,12 @@ Technical Constraints:
 
 </details>
 
+### 🎨 Directrices para Iconos y Accesos Personalizados
+- **PNG Transparente / SVG Vectorial**: Utiliza siempre iconos con **fondo 100% transparente (RGBA)** o archivos SVG vectoriales en la carpeta `icon/`. Debido a que la pantalla de la pulsera es AMOLED negro puro (`#000000`), los iconos con recuadros blancos o sólidos rompen la estética visual.
+- **Resolución Nativa 96 × 96 px**: Las imágenes de alta resolución (ej. 512×512) colocadas en `src/common/icons/` se redimensionarán y normalizarán automáticamente a 96×96 RGBA al ejecutar `python3 generate_assets.py`. Mantén una proporción 1:1 con el logo centrado.
+- **Añadir / Eliminar Accesos**: Puedes añadir cualquier servicio (Discord, Spotify, Pix, Twitch) o eliminar los que no necesites editando `APP_ITEMS` en `src/pages/index/index.ux` y `QR_ITEMS` en `generate_assets.py`.
+- **Formatos URI**: Consulta [`AI_CUSTOMIZATION_PROMPT.md`](./AI_CUSTOMIZATION_PROMPT.md) para ver la guía completa de esquemas de datos (`tel:+`, `https://wa.me/`, `WIFI:S:...;T:WPA;P:...;;`, etc.).
+
 ---
 
 ## 05 / AUTOMATIZACIÓN LOCAL (TERMINAL)
